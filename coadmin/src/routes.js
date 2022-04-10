@@ -31,7 +31,7 @@ export default [
     path: "/",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/blog-posts" />
+    component: () => <Redirect to="/coadmin" />
   },
   {
     path: "/blog-overview",
