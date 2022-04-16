@@ -69,6 +69,9 @@ const BlogsManagement = () => {
                   <th scope="col" className="border-0">
                     Action
                   </th>
+                  <th scope="col" className="border-0">
+                    Social Media
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -95,6 +98,9 @@ const BlogsManagement = () => {
                         Info
                         </Button>
                     </Link>
+                  </td>
+                  <td>
+                  {blog.socialmedia}
                   </td>
                 </tr>
                 ))}

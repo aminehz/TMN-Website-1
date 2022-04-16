@@ -24,7 +24,7 @@ import AddNewNews from "./views/AddNewNews";
 import AddNewEvent from "./views/AddNewEvent";
 import BlogDetails from "./views/BlogDetails";
 import EventDetails from "./views/EventDetails";
-
+import Login from "./views/Login";
 
 export default [
   {

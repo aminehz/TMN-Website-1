@@ -11,36 +11,50 @@ import {
 
 import "../shards-dashboard/styles/Login.css";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name,setName] = useState("");
-  const history=useHistory();
-  function validateForm() {
-    return email.length > 0 && password.length > 0;
-  }
-
-  const handleSubmit=(e)=> {
-    e.preventDefault();
-    let data={email,password,name};
-
-  fetch("http://localhost:3000/api/coadmin/login",
-  {
-    method:'POST',
-    headers: {"Content-Type":"application/json"},
-    body: data
-  }
   
-  ).then(res => {
-    
-    if (res.ok) { 
-      history.push("/blog-posts");
-    } 
-    alert(JSON.stringify(res))
-    return res.json();
-  })
+  const history = useHistory();
+
+  async function loginFunction() {
+    const bodylogin = { name:name,email: email, password: password };
+    await axios
+      .post("http://localhost:3000/api/coadmin/login", bodylogin)
+      .then((response) => {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("email", email);
+
+        //alert("login successful\ntoken="+token);
+        history.push("/blog-posts");
+      })
+      .catch((error) => {
+        let errors = Object.keys(error.response.data);
+        errors.forEach((element) => {
+          if(element=="name"){
+            setName(error.response.data.name);
+          }
+          else if (element === "email") {
+            setEmail(error.response.data.email);
+          } else if (element === "password") {
+            setPassword(error.response.data.password);
+          }
+        });
+        if(!errors.includes("name")){
+          setName("");
+        }
+        else if (!errors.includes("email")) {
+          setEmail("");
+        }
+        if (!errors.includes("password")) {
+          setPassword("");
+        }
+      });
   }
+
   return (
     <div className="log">
       <img
@@ -54,7 +68,7 @@ export default function Login() {
     <ListGroupItem className="p-3">
       <Row>
         <Col>
-          <form onSubmit={(e) => handleSubmit(e)}>
+          
             <Row form>
             <Col md="6" className="form-group">
                 <label htmlFor="feEmailAddress">Name</label>
@@ -89,11 +103,11 @@ export default function Login() {
             </Row>
             <br></br>
             
-            <Button type="submit" size="sm" theme="dark" className="mb-2 mr-1" >
+            <Button type="submit" size="sm" theme="dark" className="mb-2 mr-1" onClick={loginFunction}>
         Sign In
       </Button>
       
-          </form>
+          
         </Col>
       </Row>
     </ListGroupItem>

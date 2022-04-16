@@ -6,7 +6,7 @@ const CategorySchema = new Schema(
     title: {
       type: String,
       required: true,
-      unique: true,
+      //unique: true,
     },
 
     refrencesTo: {
@@ -18,6 +18,6 @@ const CategorySchema = new Schema(
   { timestamps: true }
 );
 
-CategorySchema.plugin(uniqueValidator);
+//CategorySchema.plugin(uniqueValidator);
 
 module.exports = model("Category", CategorySchema);
