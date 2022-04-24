@@ -89,10 +89,22 @@ const BlogsManagement = () => {
                     </Badge>
                   </td>
                   <td>
-                    <Button outline size="sm" theme="success" className="mb-2 mr-1" disabled={blog.status==="rejected" ? true: "" ? blog.status==="approved" ? true: "":""}>
+                    <Button outline size="sm" theme="success" className="mb-2 mr-1" hidden={(() => {
+                      switch (blog.status) {
+                        case "approved":    return true;
+                        case "rejected":    return true;
+                        default :           return false;
+                      }
+                    })()}>
                         Approve
                     </Button>
-                    <Button outline size="sm" theme="danger" className="mb-2 mr-1">
+                    <Button outline size="sm" theme="danger" className="mb-2 mr-1" hidden={(() => {
+                      switch (blog.status) {
+                        case "approved":    return true;
+                        case "rejected":    return true;
+                        default :           return false;
+                      }
+                    })()}>
                         Reject
                     </Button>
                     <Link to={`/Blog-details/${blog._id}`}>

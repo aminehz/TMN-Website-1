@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Group, Button, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
 import googleIcon from "../../media/google.svg";
@@ -13,6 +13,9 @@ function LoginNav() {
     height: 50,
     borderWidth: 1,
   };
+  useEffect(()=>{
+    document.title = "login"
+  })
 
   async function loginFunction() {
     

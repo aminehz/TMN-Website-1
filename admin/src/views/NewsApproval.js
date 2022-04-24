@@ -77,13 +77,31 @@ const NewsManagement = () => {
                   <td>{news.category ? news.category.title : ""}</td>
                   <td>{news.author}</td>
                   <td>
-                  <Badge theme={news.status==="on hold" ? "warning": news.status==="approved"?"success": "danger"}>{news.status}</Badge>
+                  <Badge theme={(() => {
+                        switch (news.status) {
+                          case "aproved":   return "success";
+                          case "rejected":  return "danger";
+                          default :         return "warning";
+                        }
+                    })()}>{news.status}</Badge>
                   </td>
                   <td>
-                    <Button outline size="sm" theme="success" className="mb-2 mr-1">
+                    <Button outline size="sm" theme="success" className="mb-2 mr-1" hidden={(() => {
+                      switch (news.status) {
+                        case "approved":    return true;
+                        case "rejected":    return true;
+                        default :           return false;
+                      }
+                    })()}>
                         Approve
                     </Button>
-                    <Button outline size="sm" theme="danger" className="mb-2 mr-1">
+                    <Button outline size="sm" theme="danger" className="mb-2 mr-1" hidden={(() => {
+                      switch (news.status) {
+                        case "approved":    return true;
+                        case "rejected":    return true;
+                        default :           return false;
+                      }
+                    })()}>
                         Reject
                     </Button>
                     <Link to={`/news-details/${news._id}`}>

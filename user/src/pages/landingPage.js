@@ -1,5 +1,5 @@
-import { Center, Group, Space, Text, Affix, Transition, ActionIcon } from "@mantine/core";
-import React from "react";
+import { Center, Group, Space, Text, Affix, Transition, ActionIcon,Loader } from "@mantine/core";
+import React, {useState, useEffect} from "react";
 import NavBar from "../components/navbar";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
@@ -9,12 +9,49 @@ import LatestNews from "../components/latestComp";
 import Footer from "../components/footer";
 import { useWindowScroll } from '@mantine/hooks';
 import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
-
+import axios from "axios";
+import get_youtube_thumbnail from "../components/getthumbnail";
+import LatestNewsNoB from "../components/latestCompNoB";
+import EventCard from "../components/eventCard";
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 function LandingPage() {
   const [scroll, scrollTo] = useWindowScroll();
+  let [blogs, setBlogs] = useState();
+  let [pods, setPods] = useState();
+  let [evnts, setEvnts] = useState();
+  let [nws, setNws] = useState();
+
+  useEffect(() => { 
+    document.title = "Home Page"
+    function getdata(){
+      axios.get("http://localhost:3000/api/blogs/allblogs").then((response) => {
+        setBlogs(response.data);
+      });
+      axios.get("http://localhost:3000/api/podcasts/allpodcasts").then((response) => {
+        setPods(response.data);
+      });
+      axios.get("http://localhost:3000/api/event/allEvents").then((response) => {
+        setEvnts(response.data);
+      });
+      axios.get("http://localhost:3000/api/news/allNews").then((response) => {
+        setNws(response.data);
+      });
+    }
+    getdata();
+    
+  }, []);
+
+  if (!blogs || !pods || !evnts || !nws){
+    return(
+      <Center style={{ widt: "100%", height: "80vh" }}>
+      <Loader color="dark" size="xl" variant="bars" />
+    </Center>
+      );
+  }
+
+
 
   return (
     <div>
@@ -33,26 +70,26 @@ function LandingPage() {
           >
             <div>
               <SliderArticle
-                src="https://cdnb.artstation.com/p/assets/images/images/024/796/147/large/thomas-simon-untitled-8.jpg?1583562121&dl=1"
-                id="02"
-                title="dezz akel pull request" 
-                description="enfin, ba3d allahou a3laam 9adem wa9t, ernez 3mal pull request, literally wallit nebki mel far7a ki choft el notification"
+                src={'data:image/png;base64,'+blogs[0].image}
+                id={'blogs/'+blogs[0].category.title+"/"+blogs[0]._id}
+                title={blogs[0].title}
+                description={blogs[0].content}
               />
             </div>
             <div>
-              <SliderArticle
-                src="https://i0.wp.com/www.eurasiareview.com/wp-content/uploads/2018/12/c-13.jpg?fit=830%2C510&ssl=1"
-                id="3"
-                title="ya wael sayab el subcategories"
-                description="yfass5ou fel subcategories mel DB w au meme temps y7ebbouni ne5dem el fonctionalité ta3 page el subcategory"
+            <SliderArticle
+                src={'data:image/png;base64,'+blogs[1].image}
+                id={'blogs/'+blogs[1].category.title+"/"+blogs[1]._id}
+                title={blogs[1].title}
+                description={blogs[1].content}
               />
             </div>
             <div>
-              <SliderArticle
-                src="https://i0.wp.com/www.eurasiareview.com/wp-content/uploads/2018/12/c-13.jpg?fit=830%2C510&ssl=1"
-                id="3"
-                title="quoi??"
-                description="m5ollili subcategory wa7da esmha islam?? t7ebech nroddou el site y9ollek el 9eblaa mniin wakahaw"
+            <SliderArticle
+                src={'data:image/png;base64,'+nws[0].newsImages}
+                id={'news/'+nws[0].category.title+"/"+nws[0]._id}
+                title={nws[0].title}
+                description={nws[0].content}
               />
             </div>
           </AutoplaySlider>
@@ -65,94 +102,96 @@ function LandingPage() {
           </Text>
           <Group position="center">
             <LatestNews
-              id="5"
+              id={nws[0]._id}
               category='news'
-              subcategory='1'
-              title="eds eds"
-              description="description of said event"
-              src="https://cdnb.artstation.com/p/assets/images/images/024/796/147/large/thomas-simon-untitled-8.jpg?1583562121&dl=1"
+              subcategory={nws[0].category.title}
+              title={nws[0].title}
+              description={nws[0].content}
+              src={nws[0].newsImages}
             />
-            <LatestNews category='news' subcategory='1' id="5" title="title" description="tell me why" />
             <LatestNews
-              id="5"
+              id={nws[1]._id}
               category='news'
-              subcategory='1'
-              title="this is basically copy paste"
-              description="you get the idea"
-            />
-          </Group>
-          <Text weight={900} style={{ fontSize: "46px" }}>
-            latest events:
-          </Text>
-          <Group position="center">
-            <LatestNews
-              id="5"
-              category='events'
-              subcategory='1'
-              title="eds eds"
-              description="description of said event"
-              src="https://cdnb.artstation.com/p/assets/images/images/024/796/147/large/thomas-simon-untitled-8.jpg?1583562121&dl=1"
+              subcategory={nws[1].category.title}
+              title={nws[1].title}
+              description={nws[1].content}
+              src={nws[1].newsImages}
             />
             <LatestNews
-              id="5"
-              category='events'
-              subcategory='1'
-              title="title"
-              description="tell me why"
-              src="https://i0.wp.com/www.eurasiareview.com/wp-content/uploads/2018/12/c-13.jpg?fit=830%2C510&ssl=1"
-            />
-            <LatestNews
-              id="5"
-              category='events'
-              subcategory='1'
-              title="this is basically copy paste"
-              description="you get the idea"
+              id={nws[2]._id}
+              category='news'
+              subcategory={nws[2].category.title}
+              title={nws[2].title}
+              description={nws[2].content}
+              src={nws[2].newsImages}
             />
           </Group>
           <Text weight={900} style={{ fontSize: "46px" }}>
             latest blogs:
           </Text>
           <Group position="center">
-            <LatestNews
-              id="5"
+          <LatestNews
+              id={blogs[0]._id}
               category='blogs'
-              subcategory='1'
-              title="eds eds"
-              description="description of said event"
-              src="https://cdnb.artstation.com/p/assets/images/images/024/796/147/large/thomas-simon-untitled-8.jpg?1583562121&dl=1"
+              subcategory={blogs[0].category.title}
+              title={blogs[0].title}
+              description={blogs[0].content}
+              src={blogs[0].image}
             />
-            <LatestNews category='blogs' subcategory='1' id="5" title="title" description="tell me why" />
             <LatestNews
-              id="5"
+              id={blogs[1]._id}
               category='blogs'
-              subcategory='1'
-              title="this is basically copy paste"
-              description="you get the idea"
-              src="https://i0.wp.com/www.eurasiareview.com/wp-content/uploads/2018/12/c-13.jpg?fit=830%2C510&ssl=1"
+              subcategory={blogs[1].category.title}
+              title={blogs[1].title}
+              description={blogs[1].content}
+              src={blogs[1].image}
+            />
+            <LatestNews
+              id={blogs[2]._id}
+              category='blogs'
+              subcategory={blogs[2].category.title}
+              title={blogs[2].title}
+              description={blogs[2].content}
+              src={blogs[2].image}
             />
           </Group>
           <Text weight={900} style={{ fontSize: "46px" }}>
             latest podcasts:
           </Text>
           <Group position="center">
-            <LatestNews
-              id="5"
+            <LatestNewsNoB
+              id={pods[0]._id}
               category='podcasts'
-              subcategory='1'
-              title="eds eds"
-              description="description of said event"
-              src="https://cdnb.artstation.com/p/assets/images/images/024/796/147/large/thomas-simon-untitled-8.jpg?1583562121&dl=1"
-            />
-            <LatestNews 
-            category='podcasts' subcategory='1' id="5" title="title" description="tell me why" />
-            <LatestNews
-              id="5"
+              subcategory={pods[0].category.title}
+              title={pods[0].title}
+              description={pods[0].details}
+              src={get_youtube_thumbnail(pods[0].podcastLink)}
+              />
+            <LatestNewsNoB
+              id={pods[1]._id}
               category='podcasts'
-              subcategory='1'
-              title="this is basically copy paste"
-              description="you get the idea"
-              src="https://i0.wp.com/www.eurasiareview.com/wp-content/uploads/2018/12/c-13.jpg?fit=830%2C510&ssl=1"
-            />
+              subcategory={pods[1].category.title}
+              title={pods[1].title}
+              description={pods[1].details}
+              src={get_youtube_thumbnail(pods[1].podcastLink)}
+              />
+              <LatestNewsNoB
+              id={pods[2]._id}
+              category='podcasts'
+              subcategory={pods[2].category.title}
+              title={pods[2].title}
+              description={pods[2].details}
+              src={get_youtube_thumbnail(pods[2].podcastLink)}
+              />
+          </Group>
+          <Text weight={900} style={{ fontSize: "46px" }}>
+            latest events:
+          </Text>
+          <Group position="center">
+          <EventCard id={evnts[0]._id} title={evnts[0].title} location={evnts[0].location} time={evnts[0].hour} src={evnts[0].eventPoster}/>
+          <EventCard id={evnts[1]._id} title={evnts[1].title} location={evnts[1].location} time={evnts[1].hour} src={evnts[1].eventPoster}/>
+          <EventCard id={evnts[2]._id} title={evnts[2].title} location={evnts[2].location} time={evnts[2].hour} src={evnts[2].eventPoster}/>
+    
           </Group>
           <Space />
         </div>

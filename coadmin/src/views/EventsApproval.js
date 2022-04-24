@@ -97,7 +97,6 @@ const EventsManagement = () => {
                   </Badge>
                   </td>
                   <td>
-                    
                     <Link to={`/event-details/${event._id}`}>
                         <Button outline size="sm" theme="info" className="mb-2 mr-1">
                         Info
@@ -112,8 +111,6 @@ const EventsManagement = () => {
         </Card>
       </Col>
     </Row>
-
-
     
   </Container>
     );

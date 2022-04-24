@@ -11,7 +11,7 @@ const BlogDetails = () => {
   const [data, setData] = useState('')
 
     const fetchData = () => {
-      fetch(`http://localhost:3000/api/blogs/detail/${id}`)
+      fetch(`http://localhost:3000/api/podcasts/allPodcasts/${id}`)
         .then(response => {
           return response.json()
         })
@@ -25,7 +25,7 @@ const BlogDetails = () => {
     }, [])
 
     const handleDelete= (id) => {
-      fetch(`http://localhost:3000/api/blogs/allblogs/${id}` , {
+      fetch(`http://localhost:3000/api/podcasts/allPodcasts/${id}` , {
           method: 'DELETE'
       }).then(() => {
           console.log("deleted");
@@ -39,7 +39,7 @@ const BlogDetails = () => {
 
     {/* Page Header */}
     <Row noGutters className="page-header py-4">
-      <PageTitle sm="4" title="Blog details" subtitle="Blogs Management" className="text-sm-left" />
+      <PageTitle sm="4" title="Podcast details" subtitle="Podcasts Management" className="text-sm-left" />
     </Row>
     
     {/* Components Navigation */}
@@ -48,7 +48,7 @@ const BlogDetails = () => {
         <Link to="/">Dashboard</Link>
       </BreadcrumbItem>
       <BreadcrumbItem>
-        <Link to="/Blogs-management">Blogs management</Link>
+        <Link to="/Podcasts-management">Podcast management</Link>
     </BreadcrumbItem>
     { data && (
     <BreadcrumbItem active>{data.title}</BreadcrumbItem>
@@ -72,7 +72,7 @@ const BlogDetails = () => {
                       {data.title}
                     </p>
                   </h5>
-                  <p className="card-text">{data.content}</p>
+                  <p className="card-text">{data.details}</p>
                 </CardBody>
                 <CardFooter className="text-muted border-top py-3">
                   <span className="d-inline-block">

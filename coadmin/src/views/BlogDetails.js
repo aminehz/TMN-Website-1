@@ -64,7 +64,7 @@ const BlogDetails = () => {
               <Card small className="card-post h-100">
                 <div
                   className="card-post__image"
-                  style={{ backgroundImage: `url(${data.image})`, height: 300 }}
+                  style={{ backgroundImage: `url(data:image/png;base64,${data.image})`, height: 400 }}
                 />
                 <CardBody>
                   <h5 className="card-title">

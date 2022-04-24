@@ -5,12 +5,15 @@ import NavBar from "../../components/navbar";
 import { Loader, Center } from "@mantine/core";
 import axios from "axios";
 import Footer from "../../components/footer";
-import imagearticle from "../../media/tst.jpg"
+import ArticleCardNoB from "../../components/articleCardNoB";
+import get_youtube_thumbnail from "../../components/getthumbnail";
+
 function CategoryContent() {
   let { category } = useParams();
   let [post, setPost] = useState();
   var rows = [];
 
+  
 /*function getcategory(categoryid){
   axios.get("http://localhost:3000/api/categorys/allCategorys/"+categoryid).then((response) => {
     alert(response.data);
@@ -21,24 +24,53 @@ function CategoryContent() {
     function getdata(){
       axios.get("http://localhost:3000/api/"+category+"/all"+category).then((response) => {
         setPost(response.data);
+          document.title = category
+        
       });}
     getdata();
     
   }, [category]);
 
   if (post){
-    
+
     post.map((piece) => {
+      if (category === 'podcasts'){
+        rows.push(
+        <ArticleCardNoB
+        title={piece.title}
+        id={piece._id}
+        category="podcasts"
+        subcategory={piece.category.title}//{piece.category}
+        description={piece.details}
+        src={get_youtube_thumbnail(piece.podcastLink)}
+      />);
+      }
+      else if (category==='news'){
+          rows.push(
+            <ArticleCard
+              title={piece.title}
+              id={piece._id}
+              category={category}
+              subcategory={piece.category.title}//{piece.category}
+              description={piece.content}
+              src={piece.newsImages}
+            />
+          );
+        }
+        else{
     rows.push(
       <ArticleCard
         title={piece.title}
         id={piece._id}
         category={category}
-        subcategory={piece.category}//{piece.category}
+        subcategory={piece.category.title}//{piece.category}
         description={piece.content}
-        src={imagearticle}
+        src={piece.image}
       />
     );
+    }
+      
+    rows.reverse();
     
     return "";
  });
@@ -54,9 +86,9 @@ else{
 return (
 <div>
   <NavBar />
-  category={category}
-  <div style={{ height:'100vh' }}>
-    <h1 style={{ color: "#000000", fontSize: 40, marginLeft:'30px' }}>{category}</h1>
+  
+  <div style={{ }}>
+    <h1 style={{ color: "#000000", fontSize: 40, marginLeft:'30px', marginTop:'70px'  }}>{category}</h1>
     <div style={{marginLeft:'30px'}}>
     {rows}
     </div>

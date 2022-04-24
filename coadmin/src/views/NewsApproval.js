@@ -77,7 +77,13 @@ const NewsManagement = () => {
                   <td>{news.category ? news.category.title : ""}</td>
                   <td>{news.author}</td>
                   <td>
-                  <Badge theme={news.status==="on hold" ? "warning": news.status==="approved"?"success": "danger"}>{news.status}</Badge>
+                  <Badge theme={(() => {
+                        switch (news.status) {
+                          case "aproved":   return "success";
+                          case "rejected":  return "danger";
+                          default :         return "warning";
+                        }
+                    })()}>{news.status}</Badge>
                   </td>
                   <td>
                     

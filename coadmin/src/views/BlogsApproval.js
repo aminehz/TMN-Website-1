@@ -92,7 +92,6 @@ const BlogsManagement = () => {
                     </Badge>
                   </td>
                   <td>
-                    
                     <Link to={`/Blog-details/${blog._id}`}>
                         <Button outline size="sm" theme="info" className="mb-2 mr-1">
                         Info
@@ -100,7 +99,7 @@ const BlogsManagement = () => {
                     </Link>
                   </td>
                   <td>
-                  {blog.socialmedia}
+                    {blog.authorSocialMedia}
                   </td>
                 </tr>
                 ))}

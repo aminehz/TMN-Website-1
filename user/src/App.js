@@ -54,7 +54,7 @@ function App() {
             <EventContent/>
           </Route>
           
-          <Route exact path="/events/:subcategory">
+          <Route exact path="/events/:id">
             <EventSubCategoryContent/>
           </Route>
 

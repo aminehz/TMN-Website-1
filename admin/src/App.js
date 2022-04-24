@@ -6,11 +6,15 @@ import withTracker from "./withTracker";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
+import Login from "./views/Login";
 
 
 export default () => (
   <Router basename={process.env.REACT_APP_BASENAME || ""}>
     <div>
+    <Route exact path="/admin">
+        <Login />
+      </Route>
       {routes.map((route, index) => {
         return (
           <Route

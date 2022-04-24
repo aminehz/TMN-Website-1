@@ -1,12 +1,14 @@
 
-import React from "react";
+import React, {useEffect} from "react";
 import NavBar from "../components/navbar";
 import { Center, Button, Group, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
 
 function WelcomePage() {
   var email = localStorage.getItem("email");
-
+  useEffect(()=>{
+    document.title = "404"
+  })
   return (
     <div>
       <NavBar />

@@ -75,8 +75,8 @@ const PodcastsApproval = () => {
                   <Badge theme={(() => {
                         switch (podcast.status) {
                           case "approved":   return "success";
-                          case "rejected":  return "danger";
-                          default :         return "warning";
+                          case "rejected":   return "danger";
+                          default :          return "warning";
                         }
                     })()}>{podcast.status}
                   </Badge>

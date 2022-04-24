@@ -97,10 +97,22 @@ const EventsManagement = () => {
                   </Badge>
                   </td>
                   <td>
-                    <Button outline size="sm" theme="success" className="mb-2 mr-1">
+                    <Button outline size="sm" theme="success" className="mb-2 mr-1" hidden={(() => {
+                      switch (event.status) {
+                        case "approved":    return true;
+                        case "rejected":    return true;
+                        default :           return false;
+                      }
+                    })()}>
                         Approve
                     </Button>
-                    <Button outline size="sm" theme="danger" className="mb-2 mr-1">
+                    <Button outline size="sm" theme="danger" className="mb-2 mr-1" hidden={(() => {
+                      switch (event.status) {
+                        case "approved":    return true;
+                        case "rejected":    return true;
+                        default :           return false;
+                      }
+                    })()}>
                         Reject
                     </Button>
                     <Link to={`/event-details/${event._id}`}>
@@ -117,8 +129,6 @@ const EventsManagement = () => {
         </Card>
       </Col>
     </Row>
-
-
     
   </Container>
     );

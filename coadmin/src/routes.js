@@ -23,8 +23,10 @@ import NewSubCategory from "./views/NewSubCategory";
 import AddNewNews from "./views/AddNewNews";
 import AddNewEvent from "./views/AddNewEvent";
 import BlogDetails from "./views/BlogDetails";
+import PodcastDetails from "./views/PodcastDetails";
 import EventDetails from "./views/EventDetails";
-import Login from "./views/Login";
+
+
 
 export default [
   {
@@ -38,7 +40,11 @@ export default [
     layout: DefaultLayout,
     component: BlogOverview
   },
-  
+  {
+    path: "/user-profile-lite",
+    layout: DefaultLayout,
+    component: UserProfileLite
+  },
   {
     path: "/new-blog",
     layout: DefaultLayout,
@@ -54,20 +60,42 @@ export default [
     layout: DefaultLayout,
     component: AddNewEvent
   },
-  
+  {
+    path: "/errors",
+    layout: DefaultLayout,
+    component: Errors
+  },
+  {
+    path: "/components-overview",
+    layout: DefaultLayout,
+    component: ComponentsOverview
+  },
+  {
+    path: "/co-admin",
+    layout: DefaultLayout,
+    component: CoAdmin 
+  },
   {
 
     path: "/categories",
     layout: DefaultLayout,
     component: Categories 
   },
-  
+  {
+    path: "/new-co-admin",
+    layout: DefaultLayout,
+    component: AddNewCoAdmin 
+  },
   {
     path: "/new-Subcategory",
     layout: DefaultLayout,
     component: NewSubCategory 
   },
-  
+  {
+    path: "/UsersManagement",
+    layout: DefaultLayout,
+    component: UsersManagement
+  },
   {
     path: "/Blogs-management",
     layout: DefaultLayout,
@@ -109,5 +137,10 @@ export default [
     path: "/event-Details/:id",
     layout: DefaultLayout,
     component: EventDetails
+  },
+  {
+    path: "/podcast-Details/:id",
+    layout: DefaultLayout,
+    component: PodcastDetails
   },
 ];

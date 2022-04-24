@@ -115,7 +115,12 @@ const AddNewBlog = () => {
             </InputGroupText>
           </InputGroupAddon>
           <FormInput placeholder="Author" onChange={() => {}} />
+          
         </InputGroup>
+        
+        <FormInput placeholder="Social Media" onChange={() =>{}}/>
+        
+        
         <Button theme="accent" size="xl" className="ml-auto">
           <i className="material-icons">file_copy</i> Publish
         </Button>

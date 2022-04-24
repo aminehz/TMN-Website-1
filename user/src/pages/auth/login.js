@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Center,
   Button,
@@ -20,6 +20,10 @@ function Login() {
   const [pass, setPass] = useState();
   const [mailerr, setMailerr] = useState();
   const [passerr, setPasserr] = useState();
+
+  useEffect(()=>{
+    document.title = "login"
+  })
 
   const hide = { display: "none" };
   const history = useHistory();

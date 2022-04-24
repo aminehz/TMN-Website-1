@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Dialog,
   Center,
@@ -43,7 +43,9 @@ function Signup() {
   const [nameerr, setNameerr] = useState();
   const [passerr, setPasserr] = useState();
   const [pass2err, setPass2err] = useState();
-
+  useEffect(()=>{
+    document.title = "Signup"
+  })
   function signupFunction() {
     if (isChecked) {
       signupFunction_main();

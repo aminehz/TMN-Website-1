@@ -10,7 +10,7 @@ function SliderArticle(props) {
         <SimpleGrid cols={2} style={{ height: "50vh", width: "100%" }}>
           <div style={{ width: "130%", backgroundColor: "#FFFFFF" }}>
             <Image
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: "100%", height: "100%",objectFit:'cover',  }}
               fit="cover"
               src={props.src}
             />
@@ -21,12 +21,13 @@ function SliderArticle(props) {
               backgroundColor: "#000000",
               padding: "10px",
               marginLeft: "27%",
+              float:'right'
             }}
           >
             <Text weight={1000} style={{ fontSize: "36px", color: "#fff" }}>
               {props.title}
             </Text>
-            <Text weight={300} style={{ fontSize: "14px", color: "#fff" }}>
+            <Text weight={300} lineClamp={4} style={{ fontSize: "14px", color: "#fff" }}>
               {props.description}
             </Text>
             <Text
@@ -56,10 +57,10 @@ function SliderArticle(props) {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <Text weight={1000} style={{ fontSize: "36px", color: "#fff" }}>
+          <Text weight={1000}  style={{ fontSize: "36px", color: "#fff" }}>
             {props.title}
           </Text>
-          <Text weight={300} style={{ fontSize: "14px", color: "#fff" }}>
+          <Text weight={300} lineClamp={4} style={{ fontSize: "14px", color: "#fff" }}>
             {props.description}
           </Text>
           <Text

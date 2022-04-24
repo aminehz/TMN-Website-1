@@ -75,8 +75,8 @@ const PodcastsApproval = () => {
                   <Badge theme={(() => {
                         switch (podcast.status) {
                           case "approved":   return "success";
-                          case "rejected":  return "danger";
-                          default :         return "warning";
+                          case "rejected":   return "danger";
+                          default :          return "warning";
                         }
                     })()}>{podcast.status}
                   </Badge>
@@ -84,7 +84,7 @@ const PodcastsApproval = () => {
                   <td>
                     <Button outline size="sm" theme="success" className="mb-2 mr-1" hidden={(() => {
                       switch (podcast.status) {
-                        case "approved":     return true;
+                        case "approved":    return true;
                         case "rejected":    return true;
                         default :           return false;
                       }
@@ -93,7 +93,7 @@ const PodcastsApproval = () => {
                     </Button>
                     <Button outline size="sm" theme="danger" className="mb-2 mr-1" hidden={(() => {
                       switch (podcast.status) {
-                        case "approved":     return true;
+                        case "approved":    return true;
                         case "rejected":    return true;
                         default :           return false;
                       }

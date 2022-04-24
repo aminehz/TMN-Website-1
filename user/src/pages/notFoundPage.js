@@ -1,7 +1,11 @@
 import { Center, Blockquote, Text } from "@mantine/core";
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "../components/navbar";
 function NotFoundPage() {
+
+  useEffect(()=>{
+    document.title = "404"
+  })
   return (
     <div>
       <NavBar />

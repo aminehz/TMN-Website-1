@@ -2,7 +2,7 @@ import { Text, Card, Image } from "@mantine/core";
 import React from "react";
 import { Link } from "react-router-dom";
 
-function LatestNews(props) {
+function LatestNewsNoB(props) {
   return (
     <div>
       <Card
@@ -13,7 +13,7 @@ function LatestNews(props) {
         to={"/" + props.category+ "/"+ props.subcategory +"/"+props.id}
       >
         <Card.Section>
-          <Image src={`data:image/jpeg;base64,${props.src}`} height={200} withPlaceholder />
+          <Image src={props.src} height={200} withPlaceholder />
         </Card.Section>
 
         <Text style={{ marginTop: "20px" }} weight={500} size="lg">
@@ -26,4 +26,4 @@ function LatestNews(props) {
   );
 }
 
-export default LatestNews;
+export default LatestNewsNoB;
