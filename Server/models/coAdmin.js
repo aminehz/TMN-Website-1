@@ -2,6 +2,7 @@ const express = require("express");
 const { Schema, model } = require("mongoose");
 
 const coAdminSchema = new Schema({
+
   name: {
     type: String,
     required: true,
@@ -9,7 +10,7 @@ const coAdminSchema = new Schema({
 
   lastName:{
     type:String,
-    required :true ,
+    required :true,
   },
 
   email: {
@@ -18,7 +19,7 @@ const coAdminSchema = new Schema({
   },
 
   password: {
-    type: String,
+    type: String, 
     required: true,
   },
 

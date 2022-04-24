@@ -1,36 +1,30 @@
 const router = require("express").Router();
 const Event = require("../models/event");
-const multer=require("multer");
+var fs = require('fs');
 
 
-
-
-// multer storage 
-  const storage = multer.diskStorage({
-    destination: './images/',
-    filename: function(req, file ,cb){
-      cb(null ,Date.now() + '-' + file.originalname)
-    }
-  })
-  const upload = multer({ storage })
+  function base64_encode(file) {
+    // read binary data
+    var bitmap = fs.readFileSync(file);
+    // convert binary data to base64 encoded string
+    return new Buffer.from(bitmap).toString('base64');
+  }
 
 
 router.post(
-  "/addEvent", upload.single('eventPoster'), 
+  "/addEvent", 
   (req, res, next) => {
 
-   
-    const imageUrl = `http://localhost:3000/images/${req.file.filename}`
-
+  
     const event = new Event({
 
       title: req.body.title,
       date: req.body.date,
       hour : req.body.hour,
       location :req.body.location,
-      eventPoster: imageUrl,
+      eventPoster: base64_encode(req.body.eventPoster),
       details:req.body.details,
-      status :"on hold ",
+      status :"on hold",
       
     });
   

@@ -4,14 +4,7 @@ const path = require("path");
 const multer=require("multer")
 var fs = require('fs');
 
-// multer storage 
-const storage = multer.diskStorage({
-  destination: './images/',
-  filename: function(req, file ,cb){
-    cb(null ,Date.now() + '-' + file.originalname)
-  }
-})
-const upload = multer({ storage })
+
 
 function base64_encode(file) {
   // read binary data
@@ -28,9 +21,6 @@ router.post("/addblog", (req, res, next) => {
 
 
 
-  //const imageUrl = `http://localhost:3000/images/${req.file.filename}`
-
-
   const blog = new Blog({
     
     title: req.body.title,
@@ -39,6 +29,7 @@ router.post("/addblog", (req, res, next) => {
     image: base64_encode(req.body.image),
     image2: base64_encode(req.body.image2),
     author:req.body.author,
+    authorSocialMedia:req.body.authorSocialMedia,
     status :"on hold",
 
   });

@@ -11,7 +11,6 @@ router.post("/addPodcast", (req, res) => {
       guests: req.body.guests,
       category: req.body.category,
       podcastLink : req.body.podcastLink,
-      videoTeaser:req.body.videoTeaser,
       details:req.body.details,
       status:"on hold",
 

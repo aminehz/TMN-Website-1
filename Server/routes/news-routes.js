@@ -1,28 +1,22 @@
 const router = require("express").Router();
 const News = require("../models/news");
-const multer = require("multer");
+var fs = require('fs');
 
 
 
-// multer storage 
-const storage = multer.diskStorage({
-    destination: './images/',
-    filename: function(req, file ,cb){
-      cb(null ,Date.now() + '-' + file.originalname)
-    }
-  })
-  const upload = multer({ storage })
+  function base64_encode(file) {
+    // read binary data
+    var bitmap = fs.readFileSync(file);
+    // convert binary data to base64 encoded string
+    return new Buffer.from(bitmap).toString('base64');
+  }
 
 
-
-
-router.post("/addNews", upload.array('newsImages'),(req, res ,next)=>{
-
-const imageUrl = `http://localhost:3000/images/${req.file.filename}`
+router.post("/addNews",(req, res ,next)=>{
 
     const news = new News ({
         title : req.body.title ,
-        newsImages:ImageUrl,
+        newsImages:base64_encode(req.body.newsImages),
         category :req.body.category,
         content : req.body.content,
         author :req.body.author,

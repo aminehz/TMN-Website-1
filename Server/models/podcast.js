@@ -27,10 +27,7 @@ const PodcastSchema = new Schema(
         required : true
     },
 
-    videoTeaser:{
-        type :String,
-        required : true
-    },
+  
     details:{
         type :String,
         required : true
