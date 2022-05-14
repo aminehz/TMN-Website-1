@@ -86,7 +86,7 @@ function LandingPage() {
             </div>
             <div>
             <SliderArticle
-                src={'data:image/png;base64,'+nws[0].newsImages}
+                src={'data:image/png;base64,'+nws[0].newsImages[0]}
                 id={'news/'+nws[0].category.title+"/"+nws[0]._id}
                 title={nws[0].title}
                 description={nws[0].content}
@@ -107,7 +107,7 @@ function LandingPage() {
               subcategory={nws[0].category.title}
               title={nws[0].title}
               description={nws[0].content}
-              src={nws[0].newsImages}
+              src={nws[0].newsImages[0]}
             />
             <LatestNews
               id={nws[1]._id}
@@ -115,15 +115,15 @@ function LandingPage() {
               subcategory={nws[1].category.title}
               title={nws[1].title}
               description={nws[1].content}
-              src={nws[1].newsImages}
+              src={nws[1].newsImages[0]}
             />
             <LatestNews
               id={nws[2]._id}
               category='news'
-              subcategory={nws[2].category.title}
+              subcategory={nws[1].category.title}
               title={nws[2].title}
               description={nws[2].content}
-              src={nws[2].newsImages}
+              src={nws[2].newsImages[0]}
             />
           </Group>
           <Text weight={900} style={{ fontSize: "46px" }}>
@@ -215,5 +215,6 @@ function LandingPage() {
     </div>
   );
 }
+
 
 export default LandingPage;

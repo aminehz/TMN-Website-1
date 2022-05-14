@@ -31,7 +31,7 @@ const BlogSchema = new Schema(
     
     authorSocialMedia:{
       type:String,
-      required:true,
+      required:false ,
     },
 
     status:{

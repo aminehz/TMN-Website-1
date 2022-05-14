@@ -1,11 +1,6 @@
 export default function() {
   return [
     {
-      title: "Blog Posts",
-      htmlBefore: '<i class="material-icons">vertical_split</i>',
-      to: "/blog-posts",
-    },
-    {
       title: "Categories",
       htmlBefore: '<i class="material-icons">view_module</i>',
       to: "/categories",
@@ -40,7 +35,7 @@ export default function() {
       htmlBefore: '<i class="material-icons">table_chart</i>',
       to: "/Events-management",
     },
-    {
+    /*{
       title: "User Profile",
       htmlBefore: '<i class="material-icons">person</i>',
       to: "/user-profile-lite",
@@ -49,11 +44,6 @@ export default function() {
       title: "Forms & Components",
       htmlBefore: '<i class="material-icons">view_module</i>',
       to: "/components-overview",
-    },
-    {
-      title: "Errors",
-      htmlBefore: '<i class="material-icons">error</i>',
-      to: "/errors",
-    }
+    },*/
   ];
 }

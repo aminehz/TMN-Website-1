@@ -4,7 +4,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import PageTitle from "../components/common/PageTitle";
 import ReactHtmlParser from 'react-html-parser';
 
-const BlogDetails = () => {
+const NewsDetails = () => {
 
   let {id}=useParams()
   const history = useHistory();
@@ -12,7 +12,7 @@ const BlogDetails = () => {
   const [data, setData] = useState('')
 
     const fetchData = () => {
-      fetch(`http://localhost:3000/api/blogs/detail/${id}`)
+      fetch(`http://localhost:3000/api/news/oneNews/${id}`)
         .then(response => {
           return response.json()
         })
@@ -25,9 +25,8 @@ const BlogDetails = () => {
       fetchData()  
     }, [])
 
-
     const handleDelete= (id) => {
-      fetch(`http://localhost:3000/api/blogs/allblogs/${id}` , {
+      fetch(`http://localhost:3000/api/news/deleteNews/${id}` , {
           method: 'DELETE'
       }).then(() => {
           console.log("deleted");
@@ -35,14 +34,13 @@ const BlogDetails = () => {
       })
     }
 
-
   return(
   
   <Container fluid className="main-content-container px-4">
 
     {/* Page Header */}
     <Row noGutters className="page-header py-4">
-      <PageTitle sm="4" title="Blog details" subtitle="Blogs Management" className="text-sm-left" />
+      <PageTitle sm="4" title="News details" subtitle="News Management" className="text-sm-left" />
     </Row>
     
     {/* Components Navigation */}
@@ -51,7 +49,7 @@ const BlogDetails = () => {
         <Link to="/">Dashboard</Link>
       </BreadcrumbItem>
       <BreadcrumbItem>
-        <Link to="/Blogs-management">Blogs management</Link>
+        <Link to="/News-management">News Management</Link>
     </BreadcrumbItem>
     { data && (
     <BreadcrumbItem active>{data.title}</BreadcrumbItem>
@@ -67,7 +65,7 @@ const BlogDetails = () => {
               <Card small className="card-post h-100">
                 <div
                   className="card-post__image"
-                  style={{ backgroundImage: `url(data:image/png;base64,${data.image})`, height: 400 , objectFit: 'contain'}}
+                  style={{ backgroundImage: `url(data:image/png;base64,${data.newsImages})`, height: 400, objectFit: 'contain' }}
                 />
                 <CardBody>
                   <h5 className="card-title">
@@ -91,11 +89,7 @@ const BlogDetails = () => {
                       {data.createdAt.substring(0,20)}
                     </p>
                   </span>
-                  <div className="my-auto ml-auto">
-                    <Button pill  theme="danger" className="mb-2 mr-1" onClick={ () => handleDelete(data._id)} >
-                      Delete
-                    </Button>
-                  </div>
+                 
                 </CardFooter>
               </Card>
             </Col>
@@ -108,4 +102,4 @@ const BlogDetails = () => {
           
 }
 
-export default BlogDetails;
+export default NewsDetails;

@@ -7,11 +7,11 @@ import { DefaultLayout } from "./layouts";
 // Route Views
 import BlogOverview from "./views/BlogOverview";
 import UserProfileLite from "./views/UserProfileLite";
-import AddNewBlog from "./views/AddNewBlog";
-import AddNewCoAdmin from "./views/AddNewCoAdmin";
+import AddNewBlog from "./views/Addnewblog";
+
 import Errors from "./views/Errors";
 import ComponentsOverview from "./views/ComponentsOverview";
-import UsersManagement from "./views/UsersManagement";
+
 import BlogPosts from "./views/BlogPosts";
 import CoAdmin from "./views/CoAdmin";
 import BlogsApproval from "./views/BlogsApproval";
@@ -22,17 +22,19 @@ import Categories from "./views/Categories";
 import NewSubCategory from "./views/NewSubCategory";
 import AddNewNews from "./views/AddNewNews";
 import AddNewEvent from "./views/AddNewEvent";
+import AddNewPodcast from "./views/AddNewPodcast";
 import BlogDetails from "./views/BlogDetails";
 import PodcastDetails from "./views/PodcastDetails";
 import EventDetails from "./views/EventDetails";
-
-
+import NewsDetails from "./views/NewsDetails";
+import Login from "./views/Login";
 
 export default [
   {
     path: "/",
     exact: true,
     layout: DefaultLayout,
+
     component: () => <Redirect to="/coadmin" />
   },
   {
@@ -81,21 +83,13 @@ export default [
     layout: DefaultLayout,
     component: Categories 
   },
-  {
-    path: "/new-co-admin",
-    layout: DefaultLayout,
-    component: AddNewCoAdmin 
-  },
+ 
   {
     path: "/new-Subcategory",
     layout: DefaultLayout,
     component: NewSubCategory 
   },
-  {
-    path: "/UsersManagement",
-    layout: DefaultLayout,
-    component: UsersManagement
-  },
+ 
   {
     path: "/Blogs-management",
     layout: DefaultLayout,
@@ -116,13 +110,7 @@ export default [
     layout: DefaultLayout,
     component: EventsApproval
   },
-  {
-
-    path: "/tables",
-    layout: DefaultLayout,
-    component: UsersManagement
-
-  },
+  
   {
     path: "/blog-posts",
     layout: DefaultLayout,
@@ -139,8 +127,18 @@ export default [
     component: EventDetails
   },
   {
+    path: "/news-details/:id",
+    layout: DefaultLayout,
+    component: NewsDetails
+  },
+  {
     path: "/podcast-Details/:id",
     layout: DefaultLayout,
     component: PodcastDetails
+  },
+  {
+    path: "/new-podcast",
+    layout: DefaultLayout,
+    component: AddNewPodcast
   },
 ];

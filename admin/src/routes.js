@@ -22,9 +22,11 @@ import Categories from "./views/Categories";
 import NewSubCategory from "./views/NewSubCategory";
 import AddNewNews from "./views/AddNewNews";
 import AddNewEvent from "./views/AddNewEvent";
+import AddNewPodcast from "./views/AddNewPodcast";
 import BlogDetails from "./views/BlogDetails";
 import PodcastDetails from "./views/PodcastDetails";
 import EventDetails from "./views/EventDetails";
+import NewsDetails from "./views/NewsDetails";
 
 
 export default [
@@ -32,7 +34,8 @@ export default [
     path: "/",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/admin" />
+
+    component: () => <Redirect to="/Blogs-management" />
   },
   {
     path: "/blog-overview",
@@ -138,8 +141,18 @@ export default [
     component: EventDetails
   },
   {
+    path: "/news-details/:id",
+    layout: DefaultLayout,
+    component: NewsDetails
+  },
+  {
     path: "/podcast-Details/:id",
     layout: DefaultLayout,
     component: PodcastDetails
+  },
+  {
+    path: "/new-podcast",
+    layout: DefaultLayout,
+    component: AddNewPodcast
   },
 ];

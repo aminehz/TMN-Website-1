@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Container, Row, Col, Breadcrumb, BreadcrumbItem, CardBody, Card, CardFooter, Button } from "shards-react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import PageTitle from "../components/common/PageTitle";
+import ReactHtmlParser from 'react-html-parser';
 
 const BlogDetails = () => {
 
@@ -24,6 +25,7 @@ const BlogDetails = () => {
       fetchData()  
     }, [])
 
+
     const handleDelete= (id) => {
       fetch(`http://localhost:3000/api/blogs/allblogs/${id}` , {
           method: 'DELETE'
@@ -32,6 +34,7 @@ const BlogDetails = () => {
           history.go(-1);
       })
     }
+
 
   return(
   
@@ -64,7 +67,7 @@ const BlogDetails = () => {
               <Card small className="card-post h-100">
                 <div
                   className="card-post__image"
-                  style={{ backgroundImage: `url(data:image/png;base64,${data.image})`, height: 400 }}
+                  style={{ backgroundImage: `url(data:image/png;base64,${data.image})`, height: 400 , objectFit: 'contain'}}
                 />
                 <CardBody>
                   <h5 className="card-title">
@@ -72,7 +75,7 @@ const BlogDetails = () => {
                       {data.title}
                     </p>
                   </h5>
-                  <p className="card-text">{data.content}</p>
+                  <p className="card-text">{ReactHtmlParser(data.content)}</p>
                 </CardBody>
                 <CardFooter className="text-muted border-top py-3">
                   <span className="d-inline-block">
@@ -85,14 +88,10 @@ const BlogDetails = () => {
                   <span className="d-inline-block">
                     Created At
                     <p className="text-fiord-blue">
-                      {data.createdAt}
+                      {data.createdAt.substring(0,20)}
                     </p>
                   </span>
-                  <div className="my-auto ml-auto">
-                    <Button pill  theme="danger" className="mb-2 mr-1" onClick={ () => handleDelete(data._id)} >
-                      Delete
-                    </Button>
-                  </div>
+                  
                 </CardFooter>
               </Card>
             </Col>

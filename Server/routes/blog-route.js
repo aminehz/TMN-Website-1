@@ -5,7 +5,6 @@ const multer=require("multer")
 var fs = require('fs');
 
 
-
 function base64_encode(file) {
   // read binary data
   var bitmap = fs.readFileSync(file);
@@ -26,8 +25,7 @@ router.post("/addblog", (req, res, next) => {
     title: req.body.title,
     category: req.body.category,
     content: req.body.content,
-    image: base64_encode(req.body.image),
-    image2: base64_encode(req.body.image2),
+    image: req.body.image,
     author:req.body.author,
     authorSocialMedia:req.body.authorSocialMedia,
     status :"on hold",

@@ -41,23 +41,20 @@ const AddNewNews = () => {
   }, [])
 
   const [title,setTitle]= useState('');
-    const [content,setContent]= useState('');
+    const [details,setDetails]= useState('');
     const [category,setCategory]= useState('');
-    const [newsImages,setNewsImages]= useState('');
+    const [link,setLink]= useState('');
     const [author,setAuthor]= useState('');
+    const [guests,setguests]= useState('');
     const [isPending, setIsPending] = useState(false);
     const history= useHistory();
 
     const handleSubmit = (e) => {
       e.preventDefault();
-        let newtab = []
-        newsImages.map((pic) => {
-          newtab.push(pic.base64.split("base64,")[1])
-        })
         
-        let formData = {"title":title, content:content,category:category,author:author,newsImages:newtab,status:'approved'};
+        let formData = {title:title, details:details,category:category,author:author,podcastLink:link,guests:guests,status:'approved'};
        
-        axios.post(`http://localhost:3000/api/news/addNews`, formData )
+        axios.post(`http://localhost:3000/api/podcasts/addPodcast`, formData )
         .then(res => {
           setIsPending(true);
           history.go(-1);
@@ -78,9 +75,9 @@ const AddNewNews = () => {
         <Link to="/">Dashboard</Link>
       </BreadcrumbItem>
       <BreadcrumbItem>
-        <Link to="/News-management">News Management</Link>
+        <Link to="/Podcasts-management">Podcasts Management</Link>
       </BreadcrumbItem>
-      <BreadcrumbItem active>New News</BreadcrumbItem>
+      <BreadcrumbItem active>New Podcast</BreadcrumbItem>
     </Breadcrumb>
 
     <Row>
@@ -98,8 +95,8 @@ const AddNewNews = () => {
                   onChange={(e) => setTitle(e.target.value)} />
             <ReactQuill className="add-new-post__editor mb-1"
                   required={true}
-                  value={content}
-                  onChange={setContent}
+                  value={details}
+                  onChange={setDetails}
             />
           </Form>
         </CardBody>
@@ -117,30 +114,29 @@ const AddNewNews = () => {
         {categories &&
                 categories.map((category) => (
     
-          category.refrencesTo==='news'?<option value={category._id}>{category.title}</option>:''
+          category.refrencesTo==='podcast'?<option value={category._id}>{category.title}</option>:''
         ))}
         </FormSelect>
         </InputGroup>
-        <FileInputComponent labelText=""
-          labelStyle={{fontSize:14}}
-          multiple={true}
-          callbackFunction={(file_arr)=>{setNewsImages(file_arr)}}
-          accept="image/*" 
-          imagePreview={true}
-          textBoxVisible={true}
-          buttonComponent={<></>}
-          textFieldComponent={
-          <div className="custom-file mb-3">
-          <input className="custom-file-input" id="customFile2" 
-                    required={false}
-                     />
-          <label className="custom-file-label" htmlFor="customFile2">
-            {newsImages === '' ? "chose image" : newsImages.name}
-          </label>
-        </div>
-        }
-          
-          />
+
+        <InputGroup seamless className="mb-3">
+          <InputGroupAddon type="prepend">
+            <InputGroupText>
+              <i className="material-icons">person</i>
+            </InputGroupText>
+          </InputGroupAddon>
+          <FormInput placeholder="podcast link" onChange={(e) => setLink(e.target.value)} />
+        </InputGroup>
+
+        <InputGroup seamless className="mb-3">
+          <InputGroupAddon type="prepend">
+            <InputGroupText>
+              <i className="material-icons">person</i>
+            </InputGroupText>
+          </InputGroupAddon>
+          <FormInput placeholder="guests" onChange={(e) => setguests(e.target.value)} />
+        </InputGroup>
+        
         <InputGroup seamless className="mb-3">
           <InputGroupAddon type="prepend">
             <InputGroupText>

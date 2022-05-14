@@ -4,7 +4,6 @@ import {
   ListGroupItem,
   Row,
   Col,
-  Form,
   FormInput,
   Button
 } from "shards-react";
@@ -29,12 +28,12 @@ export default function Login() {
         localStorage.setItem("email", email);
 
         //alert("login successful\ntoken="+token);
-        history.push("/blog-posts");
+        history.push("/categories");
       })
       .catch((error) => {
         let errors = Object.keys(error.response.data);
         errors.forEach((element) => {
-          if(element=="name"){
+          if(element==="name"){
             setName(error.response.data.name);
           }
           else if (element === "email") {

@@ -10,7 +10,7 @@ const NewsSchema = new Schema(
     },
     
     newsImages:{
-        type :String,
+        type :[String],
         required : true
     },
     

@@ -22,7 +22,7 @@ router.post(
       date: req.body.date,
       hour : req.body.hour,
       location :req.body.location,
-      eventPoster: base64_encode(req.body.eventPoster),
+      eventPoster: req.body.eventPoster,
       details:req.body.details,
       status :"on hold",
       

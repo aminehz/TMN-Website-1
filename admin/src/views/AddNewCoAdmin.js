@@ -39,7 +39,6 @@ const AddNewCoAdmin = () => {
       setIsPending(true);
       history.go(-1);
     })
-
   }
 
   return(

@@ -37,7 +37,7 @@ function EventContent() {
     );
     else{
       post.map((piece) => {
-        rows.push(<EventCard id={piece._id} title={piece.title} location={piece.location} time={piece.hour} src={piece.eventPoster}></EventCard>)
+        rows.push(<EventCard id={piece._id} date={piece.date.substring(0,10)} title={piece.title} location={piece.location} time={piece.hour} src={piece.eventPoster}></EventCard>)
       })
       rows.reverse();
   return (

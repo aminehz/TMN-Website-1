@@ -48,7 +48,7 @@ function SubCategoryContent() {
               category={category}
               subcategory={piece.category.title}//{piece.category}
               description={piece.content}
-              src={piece.newsImages}
+              src={piece.newsImages[0]}
             />)
          }
         else{

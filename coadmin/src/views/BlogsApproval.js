@@ -3,9 +3,11 @@ import { Container, Row, Col, Card, CardHeader, CardBody, Button, Breadcrumb, Br
 import { Link, } from "react-router-dom";
 import PageTitle from "../components/common/PageTitle";
 
+
 const BlogsManagement = () => {
 
   const [blogs, setBlogs] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
 
     const fetchData = () => {
       fetch("http://localhost:3000/api/blogs/allblogs")
@@ -14,6 +16,7 @@ const BlogsManagement = () => {
         })
         .then(data => {
           setBlogs(data)
+          setIsLoading(false)
         })
     }
   
@@ -69,12 +72,10 @@ const BlogsManagement = () => {
                   <th scope="col" className="border-0">
                     Action
                   </th>
-                  <th scope="col" className="border-0">
-                    Social Media
-                  </th>
                 </tr>
               </thead>
               <tbody>
+              { isLoading && <td>Loading blogs ...</td> }
               {blogs &&
                 blogs.map((blog, _id) => (
                 <tr key={blog._id}>
@@ -84,7 +85,7 @@ const BlogsManagement = () => {
                   <td>                 
                     <Badge theme={(() => {
                         switch (blog.status) {
-                          case "aproved":   return "success";
+                          case "approved":   return "success";
                           case "rejected":  return "danger";
                           default :         return "warning";
                         }
@@ -92,14 +93,12 @@ const BlogsManagement = () => {
                     </Badge>
                   </td>
                   <td>
+                   
                     <Link to={`/Blog-details/${blog._id}`}>
                         <Button outline size="sm" theme="info" className="mb-2 mr-1">
                         Info
                         </Button>
                     </Link>
-                  </td>
-                  <td>
-                    {blog.authorSocialMedia}
                   </td>
                 </tr>
                 ))}

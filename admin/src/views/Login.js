@@ -4,7 +4,6 @@ import {
   ListGroupItem,
   Row,
   Col,
-  Form,
   FormInput,
   Button
 } from "shards-react";
@@ -34,7 +33,7 @@ export default function Login() {
       .catch((error) => {
         let errors = Object.keys(error.response.data);
         errors.forEach((element) => {
-          if(element=="name"){
+          if(element==="name"){
             setName(error.response.data.name);
           }
           else if (element === "email") {

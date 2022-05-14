@@ -6,6 +6,7 @@ import PageTitle from "../components/common/PageTitle";
 const NewsManagement = () => {
 
   const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
     const fetchData = () => {
       fetch("http://localhost:3000/api/news/allNews")
@@ -14,6 +15,7 @@ const NewsManagement = () => {
         })
         .then(data => {
           setData(data)
+          setIsLoading(false)
         })
     }
   
@@ -70,6 +72,7 @@ const NewsManagement = () => {
                 </tr>
               </thead>
               <tbody>
+              { isLoading && <td>Loading news ...</td> }
               {data &&
                 data.map((news, _id) =>(
                 <tr key={news._id}>

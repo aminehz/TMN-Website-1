@@ -4,11 +4,15 @@ var fs = require('fs');
 
 
 
-  function base64_encode(file) {
+  function base64_encode(files) {
+    let arr = [];
     // read binary data
-    var bitmap = fs.readFileSync(file);
+    files.map((file)=>{
+      var bitmap = fs.readFileSync(file);
     // convert binary data to base64 encoded string
-    return new Buffer.from(bitmap).toString('base64');
+    arr.push(new Buffer.from(bitmap).toString('base64'));
+    })
+    return arr;
   }
 
 
@@ -16,7 +20,7 @@ router.post("/addNews",(req, res ,next)=>{
 
     const news = new News ({
         title : req.body.title ,
-        newsImages:base64_encode(req.body.newsImages),
+        newsImages:req.body.newsImages,
         category :req.body.category,
         content : req.body.content,
         author :req.body.author,

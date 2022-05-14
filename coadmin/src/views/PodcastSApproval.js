@@ -6,6 +6,7 @@ import PageTitle from "../components/common/PageTitle";
 const PodcastsApproval = () => {
 
   const [podcasts, setPodcasts] = useState([])
+  const [isLoading, setIsLoading]= useState(true)
 
     const fetchData = () => {
       fetch("http://localhost:3000/api/podcasts/allPodcasts")
@@ -14,6 +15,7 @@ const PodcastsApproval = () => {
         })
         .then(data => {
           setPodcasts(data)
+          setIsLoading(false)
         })
     }
   
@@ -41,7 +43,12 @@ const PodcastsApproval = () => {
       <Col>
         <Card small className="mb-4 overflow-hidden">
           <CardHeader className="bg-dark">
-            <h6 className="m-0 text-white">Requested Podcasts</h6>
+            <h6 className="m-0 text-white">Podcasts list</h6>
+            <Link to="/new-podcast">
+              <Button outline theme="primary" className="mb-2 mr-1" style={{float: "right"}}>
+                Add Podcast
+              </Button>
+            </Link>
           </CardHeader>
           <CardBody className="bg-dark p-0 pb-3">
             <table className="table table-dark mb-0">
@@ -65,6 +72,7 @@ const PodcastsApproval = () => {
                 </tr>
               </thead>
               <tbody>
+              { isLoading && <td>Loading Podcasts ...</td> }
               {podcasts && 
                 podcasts.map((podcast, _id) =>(
                 <tr key={podcast._id}>
@@ -82,7 +90,7 @@ const PodcastsApproval = () => {
                   </Badge>
                   </td>
                   <td>
-                    
+                   
                     <Link to={`/podcast-details/${podcast._id}`}>
                         <Button outline size="sm" theme="info" className="mb-2 mr-1">
                         Info

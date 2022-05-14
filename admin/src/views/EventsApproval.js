@@ -6,6 +6,7 @@ import PageTitle from "../components/common/PageTitle";
 const EventsManagement = () => {
 
   const [events, setEvents] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
 
     const fetchData = () => {
       fetch("http://localhost:3000/api/event/allEvents")
@@ -14,6 +15,7 @@ const EventsManagement = () => {
         })
         .then(data => {
           setEvents(data)
+          setIsLoading(false)
         })
     }
   
@@ -67,9 +69,6 @@ const EventsManagement = () => {
                     Location
                   </th>
                   <th scope="col" className="border-0">
-                    Posted by
-                  </th>
-                  <th scope="col" className="border-0">
                     Status
                   </th>
                   <th scope="col" className="border-0">
@@ -78,14 +77,14 @@ const EventsManagement = () => {
                 </tr>
               </thead>
               <tbody>
+              { isLoading && <td>Loading events ...</td> }
               {events &&
                 events.map((event, _id) =>(
                 <tr key={event._id}>
                   <td>{event.title}</td>
-                  <td>{event.date}</td>
+                  <td>{event.date.substring(0,15)}</td>
                   <td>{event.hour}</td>
                   <td>{event.location}</td>
-                  <td>{event.eventPoster}</td>
                   <td>
                   <Badge theme={(() => {
                         switch (event.status) {

@@ -53,7 +53,7 @@ function CategoryContent() {
               category={category}
               subcategory={piece.category.title}//{piece.category}
               description={piece.content}
-              src={piece.newsImages}
+              src={piece.newsImages[0]}
             />
           );
         }

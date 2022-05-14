@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Container, Row, Col, Breadcrumb, BreadcrumbItem, CardBody, Card, CardFooter, Button } from "shards-react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import PageTitle from "../components/common/PageTitle";
+import ReactHtmlParser from 'react-html-parser';
 
 const EventDetails = () => {
 
@@ -61,24 +62,50 @@ const EventDetails = () => {
       <Col>
       <Row>
           { data && (
-            <Col lg="12" key={data._id}>
-              <Card small className="card-post mb-4">
+            <Col lg="12" md="12" sm="12" className="mb-4">
+              <Card small className="card-post h-100">
+                <div
+                  className="card-post__image"
+                  style={{ backgroundImage: `url(data:image/png;base64,${data.eventPoster})`, height: 500 , objectFit: 'fill'}}
+                />
                 <CardBody>
-                  <h5 className="card-title">{data.title}</h5>
-                  <p className="card-text text-muted">{data.details}</p>
+                  <h5 className="card-title">
+                    <p className="text-fiord-blue">
+                      {data.title}
+                    </p>
+                  </h5>
+                  <p className="card-text">{ReactHtmlParser(data.content)}</p>
                 </CardBody>
-                <CardFooter className="border-top d-flex">
-                  <div className="card-post__author d-flex">
-                    <div className="d-flex flex-column justify-content-center ml-3">
-                      <span className="card-post__author-name">
-                      <div className="text-fiord-blue">Posted by</div>
-                        {data.eventPoster}
-                      </span>
-                      <small className="text-muted">{data.date}</small>
-                    </div>
-                  </div>
+                <CardFooter className="text-muted border-top py-3">
+                  <span className="d-inline-block">
+                    Located at:
+                    <p className="text-fiord-blue">
+                      {data.location}
+                    </p>
+                  </span>
+                  <br/>
+                  <span className="d-inline-block">
+                    Hour:
+                    <p className="text-fiord-blue">
+                      {data.hour}
+                    </p>
+                  </span>
+                  <br/>
+                  <span className="d-inline-block">
+                    Date:
+                    <p className="text-fiord-blue">
+                      {data.date.substring(0,15)}
+                    </p>
+                  </span>
+                  <br/>
+                  <span className="d-inline-block">
+                    Created at:
+                    <p className="text-fiord-blue">
+                      {data.createdAt.substring(0,20)}
+                    </p>
+                  </span>
                   <div className="my-auto ml-auto">
-                    <Button pill size="sm" theme="danger" className="mb-2 mr-1" onClick={ () => handleDelete(data._id)} >
+                    <Button pill  theme="danger" className="mb-2 mr-1" onClick={ () => handleDelete(data._id)} >
                       Delete
                     </Button>
                   </div>
